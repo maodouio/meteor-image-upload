@@ -1,8 +1,8 @@
 
-### Client:
-Template中加上{{> imgUploader}} 即可使用
+#### Client:
+Template中加上 `{{> imgUploader}}` 即可使用
 
-### Server：
+#### Server：
 随意设置一个js文件如下格式即可, e.g:`server/config.js`
 
 ```js
@@ -14,7 +14,7 @@ Maodouio.imageUpload.config({
 });
 ```
 
-### 目前存在问题：
+#### 目前存在问题：
 1. 没有做任何的权限设置，登不登录都能传
 2. token中似乎有一项 *3600000ms* 的生存时间，还未验证
 3. 图片没有上传进度的显示，界面不够友好
