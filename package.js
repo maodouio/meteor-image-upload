@@ -1,5 +1,5 @@
 Package.describe({
-  name: 'jiatian:qiniu-uploader',
+  name: 'maodouio:meteor-image-upload',
   version: '0.0.1',
   // Brief, one-line summary of the package.
   summary: '',
@@ -11,10 +11,17 @@ Package.describe({
 });
 
 Package.onUse(function(api) {
-  api.versionsFrom('1.2.1');
+  // api.versionsFrom('1.2.1');
   api.use('ecmascript');
   api.use('meteorhacks:npm@1.5.0');
+  api.use("templating", "client");
   api.addFiles('qiniu-uploader.js');
+
+  api.addFiles('server/qiniu-node-sdk.js', 'server');
+  api.addFiles([
+    'client/imgUpload.html',
+    'client/imgUpload.js'
+  ], 'client');
 });
 
 Npm.depends({
