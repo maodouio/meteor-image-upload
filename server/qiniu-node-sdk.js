@@ -3,26 +3,33 @@ QiniuNodeSDK = Npm.require('qiniu');
 
 // 创建上传策略：服务端上传
 /* ==================++++填写下面三个参数++++=================*/
-var ak = 'aWYiHEpzcKB7DuRlmEwB9IhreGDj8LoaBB-W5UoZ';
-var sk = 'xvGeaTI_4R5QhP6YyO0Qi3SXuGl34ur3rhPVH8y-';
-var bucketname = 'klbj-test';
+// var ak = 'aWYiHEpzcKB7DuRlmEwB9IhreGDj8LoaBB-W5UoZ';
+// var sk = 'xvGeaTI_4R5QhP6YyO0Qi3SXuGl34ur3rhPVH8y-';
+// var bucketname = 'klbj-test';
+Maodouio = {};
+Maodouio.imageUpload = {};
+Maodouio.imageUpload._options = {};
+Maodouio.imageUpload.config = function(obj){
+  Maodouio.imageUpload._options = obj;
+  QiniuNodeSDK.conf.ACCESS_KEY = Maodouio.imageUpload._options.ACCESS_KEY;
+  QiniuNodeSDK.conf.SECRET_KEY = Maodouio.imageUpload._options.SECRET_KEY;
+  bucketname = Maodouio.imageUpload._options.BUCKET_NAME;
 
-
-
-
-QiniuNodeSDK.conf.SECRET_KEY = sk;
-QiniuNodeSDK.conf.ACCESS_KEY = ak;
-var putPolicy = new QiniuNodeSDK.rs.PutPolicy(bucketname);
+  putPolicy = new QiniuNodeSDK.rs.PutPolicy(bucketname);
+  qiniuClient = new QiniuNodeSDK.rs.Client();
+  wrappedQiniuIo = Async.wrap(QiniuNodeSDK.io, ['put']);
+  wrappedQiniuClient = Async.wrap(qiniuClient, ['stat', 'remove', 'copy', 'move']); //获取基本信息，移动...
+};
+// var bucketname;
 
 // 转换异步接口为同步
 
-var qiniuClient = new QiniuNodeSDK.rs.Client();
-var wrappedQiniuIo = Async.wrap(QiniuNodeSDK.io, ['put']);
-var wrappedQiniuClient = Async.wrap(qiniuClient, ['stat', 'remove', 'copy', 'move']); //获取基本信息，移动...
 
 // 上传二进制头像文件
 function uploadAvatarBuf(avatarBuf) {
+  console.log(putPolicy.token());
   var uptoken = putPolicy.token();
+  console.log("uptoken");
   var extra = new QiniuNodeSDK.io.PutExtra();
   extra.mimeType = 'image/jpeg';
   return wrappedQiniuIo.put(uptoken, '', avatarBuf, extra);
@@ -34,13 +41,6 @@ function uploadAvatarBuf(avatarBuf) {
 Meteor.methods({
   // 接收头像信息，base64 格式
   'sendAvatarInBase64': function(avatarBuf) {
-    // if (!this.userId) {
-    //   return {
-    //     code: -1,
-    //     msg: '非登录用户，无法上传头像'
-    //   }
-    // }
-
     var res = uploadAvatarBuf(new Buffer(avatarBuf.replace(/^data:image\/\w+;base64,/, ""), 'base64'));
 
     console.log(res);
@@ -48,26 +48,8 @@ Meteor.methods({
     if(res.key) {
       return res.key;
     }
-    // if (res.key) {
-    //   // 当前线上头像
-    //   // var currentKey = Meteor.user().avatar;
-    //   // 更新头像
-    //   // var updateRes = Meteor.users.update({'_id': this.userId}, {'$set': {'avatar': res.key}});
-    //   if (updateRes === 1) {
-    //     if (currentKey) {
-    //       // 更新成功，删除当前的头像
-    //       wrappedQiniuClient.remove(bucketname, currentKey);
-    //     }
-    //     return {
-    //       code: 0,
-    //       msg: '图片上传成功'
-    //     }
-    //   }
-    // }
-
-    // return {
-    //   code: -1,
-    //   msg: '图片上传失败，请重试'
-    // }
+  },
+  'getQiniuDomain': function () {
+    return Maodouio.imageUpload._options.DOMAIN_NAME;
   }
 });

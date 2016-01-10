@@ -15,11 +15,15 @@ Package.onUse(function(api) {
   api.use('ecmascript');
   api.use('meteorhacks:npm@1.5.0');
   api.use("templating", "client");
+  api.use('underscore',['client', 'server']);
+  api.use('tracker','server');
+  api.use('session','client');
+
+  api.export('Maodouio');
   api.addFiles('qiniu-uploader.js');
 
   api.addFiles('server/qiniu-node-sdk.js', 'server');
   api.export('QiniuNodeSDK', 'server');
-
   api.addFiles([
     'client/imgUpload.html',
     'client/imgUpload.js'
