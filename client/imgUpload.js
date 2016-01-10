@@ -27,7 +27,7 @@ Template.imgUploader.events ({
       }
       // WARN: 选取file的第一个，以后需要循环所有图片
       var file=files[0];
-      console.log(file);
+      // console.log(file);
 
       // 初始化FileReader来读取file
       var fileReader=new FileReader();
@@ -35,8 +35,21 @@ Template.imgUploader.events ({
       fileReader.onloadend = function () {
         var dataString = fileReader.result;
         // WARN: 仅限一个图片时使用，后期需要修改
-        document.querySelector('img').src = dataString;
         console.log(dataString);
+
+        var dataUrl = dataString;
+        Meteor.call('sendAvatarInBase64', dataUrl, function(err, res) {
+          if (res) {
+            document.querySelector('img').src = "http://7xpwy1.com1.z0.glb.clouddn.com/" + res;
+            alert('图片上传成功');
+          }else {
+            alert('图片上传失败，请重试');
+          }
+        });
+
+
+
+
       };
       // 转换成base64
       fileReader.readAsDataURL(file);

@@ -18,6 +18,8 @@ Package.onUse(function(api) {
   api.addFiles('qiniu-uploader.js');
 
   api.addFiles('server/qiniu-node-sdk.js', 'server');
+  api.export('QiniuNodeSDK', 'server');
+
   api.addFiles([
     'client/imgUpload.html',
     'client/imgUpload.js'

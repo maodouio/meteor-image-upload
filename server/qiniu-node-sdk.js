@@ -8,6 +8,8 @@ var sk = 'xvGeaTI_4R5QhP6YyO0Qi3SXuGl34ur3rhPVH8y-';
 var bucketname = 'klbj-test';
 
 
+
+
 QiniuNodeSDK.conf.SECRET_KEY = sk;
 QiniuNodeSDK.conf.ACCESS_KEY = ak;
 var putPolicy = new QiniuNodeSDK.rs.PutPolicy(bucketname);
@@ -32,34 +34,40 @@ function uploadAvatarBuf(avatarBuf) {
 Meteor.methods({
   // 接收头像信息，base64 格式
   'sendAvatarInBase64': function(avatarBuf) {
-    if (!this.userId) {
-      return {
-        code: -1,
-        msg: '非登录用户，无法上传头像'
-      }
-    }
+    // if (!this.userId) {
+    //   return {
+    //     code: -1,
+    //     msg: '非登录用户，无法上传头像'
+    //   }
+    // }
 
     var res = uploadAvatarBuf(new Buffer(avatarBuf.replace(/^data:image\/\w+;base64,/, ""), 'base64'));
-    if (res.key) {
-      // 当前线上头像
-      var currentKey = Meteor.user().avatar;
-      // 更新头像
-      var updateRes = Meteor.users.update({'_id': this.userId}, {'$set': {'avatar': res.key}});
-      if (updateRes === 1) {
-        if (currentKey) {
-          // 更新成功，删除当前的头像
-          wrappedQiniuClient.remove(bucketname, currentKey);
-        }
-        return {
-          code: 0,
-          msg: '图片上传成功'
-        }
-      }
-    }
 
-    return {
-      code: -1,
-      msg: '图片上传失败，请重试'
+    console.log(res);
+
+    if(res.key) {
+      return res.key;
     }
+    // if (res.key) {
+    //   // 当前线上头像
+    //   // var currentKey = Meteor.user().avatar;
+    //   // 更新头像
+    //   // var updateRes = Meteor.users.update({'_id': this.userId}, {'$set': {'avatar': res.key}});
+    //   if (updateRes === 1) {
+    //     if (currentKey) {
+    //       // 更新成功，删除当前的头像
+    //       wrappedQiniuClient.remove(bucketname, currentKey);
+    //     }
+    //     return {
+    //       code: 0,
+    //       msg: '图片上传成功'
+    //     }
+    //   }
+    // }
+
+    // return {
+    //   code: -1,
+    //   msg: '图片上传失败，请重试'
+    // }
   }
 });
