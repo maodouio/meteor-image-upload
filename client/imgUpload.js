@@ -25,7 +25,7 @@ Template.imgUploader.events ({
         var dataUrl = dataString;
         Meteor.call('sendAvatarInBase64', dataUrl, function(err, res) {
           if (res) {
-            document.querySelector('img').src = Session.get("qiniuUploadDomain") + res;
+            $("#imageReveal").attr("src",(Session.get("qiniuUploadDomain") + res));
             alert('图片上传成功');
           }else {
             alert('图片上传失败，请重试');
