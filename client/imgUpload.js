@@ -45,6 +45,7 @@ Template.imgUploader.events({
         }
       });
 
+
     };
     // 转换成base64
     fileReader.readAsDataURL(file);
