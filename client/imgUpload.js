@@ -36,6 +36,7 @@ Template.imgUploader.events({
           // document.querySelector('img').src = Session.get("qiniuUploadDomain") + res;
           $("#imageReveal").attr("src", (Session.get(
             "qiniuUploadDomain") + res));
+          $("#imageReveal").css("display", "inline-block");
           Session.set("logoImage", (Session.get(
             "qiniuUploadDomain") + res));
           // console.log(Session.get("qiniuUploadDomain") + res);
