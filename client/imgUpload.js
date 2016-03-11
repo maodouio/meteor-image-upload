@@ -4,12 +4,13 @@ Meteor.call("getQiniuDomain", function(error, result) {
   }
 });
 Template.imgUploader.onRendered = function() {
+  Session.set("logoImage", "");
 
 }
 
 Template.imgUploader.events({
-  'click #fileUpload': function() {
-    $('#myFileInput').trigger("click");
+  'click #myFileInput': function() {
+    // $('#myFileInput').trigger("click");
   },
 
   'change #myFileInput': function(e, template) {
@@ -28,17 +29,16 @@ Template.imgUploader.events({
     fileReader.onloadend = function() {
       var dataString = fileReader.result;
       // WARN: 仅限一个图片时使用，后期需要修改
-      // console.log(dataString);
 
       var dataUrl = dataString;
       Meteor.call('sendAvatarInBase64', dataUrl, function(err, res) {
         if (res) {
           // document.querySelector('img').src = Session.get("qiniuUploadDomain") + res;
-          $("#imageReveal").attr("src", (Session.get(
-            "qiniuUploadDomain") + res));
+          var imgUrl = Session.get("qiniuUploadDomain") + res + "?imageView2/2/w/200/h/55";
+          
+          $("#imageReveal").attr("src", imgUrl);
           $("#imageReveal").css("display", "inline-block");
-          Session.set("logoImage", (Session.get(
-            "qiniuUploadDomain") + res));
+          Session.set("logoImage", imgUrl);
           // console.log(Session.get("qiniuUploadDomain") + res);
           alert('图片上传成功');
         } else {
