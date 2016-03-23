@@ -3,7 +3,7 @@ Meteor.call("getQiniuDomain", function(error, result) {
     Session.set("qiniuUploadDomain", result);
   }
 });
-Template.TemplateName.onRendered(function(){
+Template.imgUploader.onRendered(function(){
   Session.set("imageFileName", "未选择文件");
   Session.set("logoImage", "");
 });
