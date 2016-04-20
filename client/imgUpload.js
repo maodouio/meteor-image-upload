@@ -37,7 +37,7 @@ Template.imgUploader.events({
       Meteor.call('sendAvatarInBase64', dataUrl, function(err, res) {
         if (res) {
           // document.querySelector('img').src = Session.get("qiniuUploadDomain") + res;
-          var imgUrl = Session.get("qiniuUploadDomain") + res + "?imageView2/2/w/200/h/55";
+          var imgUrl = Session.get("qiniuUploadDomain") + res;
 
           // $("#imageReveal").attr("src", imgUrl);
           // $("#imageReveal").css("display", "inline-block");

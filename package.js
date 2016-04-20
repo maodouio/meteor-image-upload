@@ -1,6 +1,6 @@
 Package.describe({
   name: 'maodouio:meteor-image-upload',
-  version: '0.0.1',
+  version: '0.0.4',
   // Brief, one-line summary of the package.
   summary: 'Upload image to qiniu cloud',
   // URL to the Git repository containing the source code for this package.
