@@ -17,8 +17,9 @@ Template.imgUploader.events({
     // 读取所有files
     var files = event.target.files;
     if (files.length === 0) {
-      Session.set("imageFileName", "未选择文件");
-      Session.set("logoImage", "");
+      // Session.set("imageFileName", "未选择文件");
+      // Session.set("logoImage", "");
+      // $("#imageReveal").css("display", "none");
       return;
     }
     // WARN: 选取file的第一个，以后需要循环所有图片
@@ -40,7 +41,7 @@ Template.imgUploader.events({
           var imgUrl = Session.get("qiniuUploadDomain") + res;
 
           // $("#imageReveal").attr("src", imgUrl);
-          // $("#imageReveal").css("display", "inline-block");
+          $("#imageReveal").css("display", "inline-block");
           Session.set("logoImage", imgUrl);
           // console.log(Session.get("qiniuUploadDomain") + res);
           alert('图片上传成功');
