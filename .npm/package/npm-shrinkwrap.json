@@ -2,57 +2,37 @@
   "dependencies": {
     "qiniu": {
       "version": "6.1.9",
-      "resolved": "https://registry.npmjs.org/qiniu/-/qiniu-6.1.9.tgz",
-      "from": "https://registry.npmjs.org/qiniu/-/qiniu-6.1.9.tgz",
       "dependencies": {
-        "crc32": {
-          "version": "0.2.2",
-          "resolved": "https://registry.npmjs.org/crc32/-/crc32-0.2.2.tgz",
-          "from": "https://registry.npmjs.org/crc32/-/crc32-0.2.2.tgz"
+        "mime": {
+          "version": "1.2.9"
         },
         "formstream": {
           "version": "0.0.7",
-          "resolved": "https://registry.npmjs.org/formstream/-/formstream-0.0.7.tgz",
-          "from": "https://registry.npmjs.org/formstream/-/formstream-0.0.7.tgz",
           "dependencies": {
             "buffer-concat": {
-              "version": "0.0.1",
-              "resolved": "https://registry.npmjs.org/buffer-concat/-/buffer-concat-0.0.1.tgz",
-              "from": "https://registry.npmjs.org/buffer-concat/-/buffer-concat-0.0.1.tgz"
+              "version": "0.0.1"
             },
             "pause-stream": {
               "version": "0.0.11",
-              "resolved": "https://registry.npmjs.org/pause-stream/-/pause-stream-0.0.11.tgz",
-              "from": "https://registry.npmjs.org/pause-stream/-/pause-stream-0.0.11.tgz",
               "dependencies": {
                 "through": {
-                  "version": "2.3.8",
-                  "resolved": "https://registry.npmjs.org/through/-/through-2.3.8.tgz",
-                  "from": "https://registry.npmjs.org/through/-/through-2.3.8.tgz"
+                  "version": "2.3.8"
                 }
               }
             }
           }
         },
-        "mime": {
-          "version": "1.2.9",
-          "resolved": "https://registry.npmjs.org/mime/-/mime-1.2.9.tgz",
-          "from": "https://registry.npmjs.org/mime/-/mime-1.2.9.tgz"
+        "crc32": {
+          "version": "0.2.2"
         },
         "urllib": {
           "version": "0.5.1",
-          "resolved": "https://registry.npmjs.org/urllib/-/urllib-0.5.1.tgz",
-          "from": "https://registry.npmjs.org/urllib/-/urllib-0.5.1.tgz",
           "dependencies": {
             "buffer-concat": {
-              "version": "0.0.1",
-              "resolved": "https://registry.npmjs.org/buffer-concat/-/buffer-concat-0.0.1.tgz",
-              "from": "https://registry.npmjs.org/buffer-concat/-/buffer-concat-0.0.1.tgz"
+              "version": "0.0.1"
             },
             "debug": {
-              "version": "0.7.2",
-              "resolved": "https://registry.npmjs.org/debug/-/debug-0.7.2.tgz",
-              "from": "https://registry.npmjs.org/debug/-/debug-0.7.2.tgz"
+              "version": "0.7.2"
             }
           }
         }
